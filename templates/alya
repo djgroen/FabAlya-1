@@ -1,0 +1,38 @@
+
+
+cd $job_results
+$run_prefix
+
+
+# copy all mpio.bin files for the target config_name, e.g, fluid*.mpio.bin
+MPIO_BIN_PATH=$MPIO_BIN_PATH
+FILES_LIST=$$( ls $$MPIO_BIN_PATH)
+for file in $${FILES_LIST[@]}; do
+	ls $$MPIO_BIN_PATH/$$file $$file
+done
+
+
+# copy python codes required for pre and post processing
+PYTHON_CODES_PATH=$PYTHON_CODES_PATH
+PY_FILE_NAMES=($PY_FILE_NAMES)
+for py_file in $${PY_FILE_NAMES[@]}; do
+	cp $$PYTHON_CODES_PATH/$$py_file .
+	echo "copy python file $$py_file"
+done
+
+
+# copy Alya input files *.dat
+ALYA_DAT_PATH=$ALYA_DAT_PATH
+rsync -av -m -v --include='*.dat' --exclude='*'  $$ALYA_DAT_PATH  .
+
+
+# copy bash script codes required for pre and post processing
+SH_SCRIPTS_PATH=$SH_SCRIPTS_PATH
+SH_FILE_NAME=$SH_FILE_NAME
+for sh_file in $${SH_FILE_NAME[@]}; do
+	cp $$SH_SCRIPTS_PATH/$$sh_file .
+	echo "copy script file $$sh_file"
+done
+
+
+time mpirun $ALYA_EXE_PATH $config

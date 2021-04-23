@@ -1,0 +1,44 @@
+default:
+  # possible inputs are: ["delete","ignore","warn_only"]
+  # 1- delete : delte the exist results folder 
+  # 2- ignore : ignore the exist results folder 
+  # 2- warn_only : warn user and keep the exist results folder
+  prevent_results_overwrite: "delete"
+
+
+
+Alya_simulation_config: &Alya_sim_config
+  ALYA_EXE_PATH: "/home/bsc21/bsc21717/Software/Alya_versions/777-hvad-pump-function_kpp_nobovel/Executables/unix_nastin_temper_fastest_ipo_onlyfiltAP/Alya.x"
+  
+  MPIO_BIN_PATH: "<PATH to .mpio.bin files>"
+  ALYA_DAT_PATH: "<PATH to Alya input dat files>"
+
+  PYTHON_CODES_PATH: "<PATH to python pre/pos processing files>"
+  PY_FILE_NAMES: ["field-ensi2mpio.py", "modifyHR.py", 
+                  "remote_postpro.py", "remote_prepro.py"]
+
+  SH_SCRIPTS_PATH: "<PATH to pre and post processing sh scripts>"
+  SH_FILE_NAME: ["remote.sh", "remotepre.sh"]
+  
+
+
+marenostrum4:
+  <<: *Alya_sim_config
+  username: "pr1emk01"
+  home_path_template: "/home/pr1emk00/pr1emk01"  
+  # list of available partitions : sinfo --Format=partition
+  # partition_name: "prace"
+  fabric_dir: "FabSim3"
+  corespernode: 46
+  taskpersocket: 23
+  cores: 368 # 8 nodes(8) = cores(368)/corespernode(46)  nodes = ceil(cores / cores_per_nodes)
+
+  # list of available queue for the job : bsc_queues
+  queue_name: "debug" # or "bsc_case"
+  memconfig_name: "highmem" #"highmem"
+
+  modules:
+    # list of modules to be loaded on remote machine
+    loaded: []
+    # list of modules to be unloaded on remote machine
+    unloaded: []
