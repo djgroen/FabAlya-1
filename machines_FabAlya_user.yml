@@ -8,8 +8,9 @@ default:
 
 
 Alya_simulation_config: &Alya_sim_config
-  ALYA_EXE_PATH: "/home/bsc21/bsc21717/Software/Alya_versions/777-hvad-pump-function_kpp_nobovel/Executables/unix_nastin_temper_fastest_ipo_onlyfiltAP/Alya.x"
-  
+  # ALYA_EXE_PATH: "/home/bsc21/bsc21717/Software/Alya_versions/777-hvad-pump-function_kpp_nobovel/Executables/unix_nastin_temper_fastest_ipo_onlyfiltAP/Alya.x"
+  ALYA_EXE_PATH: "<PATH to Alya code>"
+
   MPIO_BIN_PATH: "<PATH to .mpio.bin files>"
   ALYA_DAT_PATH: "<PATH to Alya input dat files>"
 
