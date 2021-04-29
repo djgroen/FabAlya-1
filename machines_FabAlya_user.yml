@@ -13,8 +13,7 @@ Alya_simulation_config: &Alya_sim_config
 
   TEMPLATE_INTPUT_FILES_PATH: "<PATH to .mpio.bin files>"
 
-  PY_FILE_NAMES: ["field-ensi2mpio.py", "modifyHR.py", 
-                  "remote_postpro.py", "remote_prepro.py"]
+  PY_FILE_NAMES: ["modifyHR.py", "remote_postpro.py", "remote_prepro.py"]
 
   SH_FILE_NAME: ["remote.sh", "remotepre.sh"]
   
