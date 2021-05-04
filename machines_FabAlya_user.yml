@@ -9,7 +9,7 @@ default:
 
 Alya_simulation_config: &Alya_sim_config
   # ALYA_EXE_PATH: "/home/bsc21/bsc21717/Software/Alya_versions/777-hvad-pump-function_kpp_nobovel/Executables/unix_nastin_temper_fastest_ipo_onlyfiltAP/Alya.x"
-  ALYA_EXE_PATH: "<PATH to Alya code>"
+  ALYA_EXE_PATH: "/home/bsc21/bsc21717/Software/Alya_versions/777-hvad-pump-function_kpp_nobovel/Executables/unix_nastin_temper_fastest_ipo_onlyfiltAP/Alya.x"
 
   TEMPLATE_INTPUT_FILES_PATH: "/gpfs/projects/bsc21/WORK-ALFONSO/Cases/02_MDDT/07_improved_valves/14_saniya_newwave_newpump/8k_newcurve_CSmed_improconfig/VECMAtk/template"
 
