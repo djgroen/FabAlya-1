@@ -13,11 +13,8 @@ Alya_simulation_config: &Alya_sim_config
 
   TEMPLATE_INTPUT_FILES_PATH: "/gpfs/projects/bsc21/WORK-ALFONSO/Cases/02_MDDT/07_improved_valves/14_saniya_newwave_newpump/8k_newcurve_CSmed_improconfig/VECMAtk/template"
 
-  PY_FILE_NAMES: ["modifyHR.py", "remote_postpro.py", "remote_prepro.py"]
-
-  SH_FILE_NAME: ["remote.sh", "remotepre.sh"]
-  
-
+localhost:
+  <<: *Alya_sim_config
 
 marenostrum4:
   <<: *Alya_sim_config

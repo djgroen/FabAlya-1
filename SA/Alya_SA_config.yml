@@ -1,0 +1,82 @@
+vary_parameters_range:
+    # <parameter_name:>
+    #   range: [<lower value>,<upper value>] 
+    LAP:
+        range: [5000, 50000]
+
+
+selected_vary_parameters: ["LAP",
+                          ]
+
+distribution_type: "Uniform" # Uniform, DiscreteUniform
+
+polynomial_order: 2
+
+
+# template file should be available in FabFlee/templates folder
+encoder_template_fname : "params.template"
+encoder_delimiter: "$"
+encoder_target_filename: "params.1"
+
+# decoder_output_column: "????"
+
+# sampler_name: str
+#   Samplers in the context of EasyVVUQ are classes that generate
+#   sequences of parameter dictionaries.
+#   available sampler: [SCSampler,PCESampler]
+#
+#   SCSampler: Stochastic Collocation sampler
+#   PCESampler : Polynomial Chaos Expansion
+#   
+#   ---------------------------------------------------------------
+#   TODO : add other available easyvvuq sampler to the code
+#   LHCSampler : Latin hypercube sampling
+#   BasicSweep :
+#   MultiSampler : Expects one or more samplers
+#   ReplicaSampler:
+#   QMCSampler : Quasi Monte Carlo sampler
+#   MCSampler: Monte Carlo sampler
+#   RandomSampler : 
+sampler_name: "SCSampler"
+
+
+# quadrature_rule : char
+#     The quadrature method, default is Gaussian "G".
+#     "G" -> Gaussian , "C" -> Clenshaw_Curtis
+quadrature_rule: "G"
+
+# sparse : bool
+#             If True use sparse grid instead of normal tensor product grid,
+#             default is False
+sparse: False
+
+# growth: bool
+#     Sets the growth rule to exponential for Clenshaw Curtis quadrature,
+#     which makes it nested, and therefore more efficient for sparse grids.
+#     Default is False.
+growth: False
+
+# midpoint_level1: bool,  ----- ONLY FOR SCSampler ------
+#     determines how many points the 1st level of a sparse grid will have.
+#     If midpoint_level1 = True, order 0 quadrature will be generated
+midpoint_level1: False
+
+# dimension_adaptive: bool, ----- ONLY FOR SCSampler ------
+#     determines wether to use an insotropic sparse grid, or to adapt
+#     the levels in the sparse grid based on a hierachical error measure
+dimension_adaptive: False
+
+# regression: bool, ----- ONLY FOR PCESampler ------
+#    If True, regression variante (point collecation) will be used,
+#    otherwise projection variante (pseud-spectral) will be used.
+#    Default value is False.
+regression: False
+
+
+# ------- NOTE ------------
+# if you set quadrature_rule="C", then you need to make sure
+#     sparse=True
+#     growth=True
+#     midpoint_level1=True
+
+

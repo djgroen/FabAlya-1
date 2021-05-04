@@ -1,0 +1,73 @@
+{
+  "LAP": {
+    "type": "float",
+    "min": 5000,
+    "max": 50000,
+    "default": 1.000000000000000e+04
+  },
+  "PUMPB": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": -1.297500000000000e-03
+  },
+  "PUMPC": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 1.530650000000000e+02
+  },
+  "HR": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 6.842500000000000e+01
+  },
+  "EF": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 2.200000000000000e-01
+  },
+  "DENSI": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 1.100000000000000e+00
+  },
+  "VISCO": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 3.720000000000000e-02
+  },
+  "PUMPA": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 0.000000000000000e+00
+  },
+  "AORP": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 1.700000000000000e+03
+  },
+  "AOC": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 1.200000000000000e-03
+  },
+  "AORS": {
+    "type": "float",
+    // "min": ???,
+    // "max": ???,
+    "default": 1.000000000000000e+02
+  },
+  // the output file to be used for the easyvvuq analysis
+  "out_file": {
+    "type": "string",    
+    "default": "out.csv" 
+  }
+}
