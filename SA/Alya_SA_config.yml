@@ -3,9 +3,23 @@ vary_parameters_range:
     #   range: [<lower value>,<upper value>] 
     LAP:
         range: [5000, 50000]
+    DENSI:
+        range: [1.1, 1.1]
+    VISCO:
+        range: [0.037, 0.037]
+    HR:
+        range: [60.0, 80.0]
+    EF:
+        range: [0.1, 0.2]
+    AORP:
+        range: [1500.0, 2000.0]
+    AOC:
+        range: [0.0001, 0.001]
+    AORS:
+        range: [100.0, 500.0]
 
 
-selected_vary_parameters: ["LAP",
+selected_vary_parameters: ["HR",
                           ]
 
 distribution_type: "Uniform" # Uniform, DiscreteUniform
