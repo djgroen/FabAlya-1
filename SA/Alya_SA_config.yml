@@ -4,9 +4,9 @@ vary_parameters_range:
     LAP:
         range: [5000, 50000]
     DENSI:
-        range: [1.1, 1.1]
+        range: [1.0, 1.1]
     VISCO:
-        range: [0.037, 0.037]
+        range: [0.03, 0.037]
     HR:
         range: [60.0, 80.0]
     EF:

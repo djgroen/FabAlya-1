@@ -1,73 +1,73 @@
 {
   "LAP": {
     "type": "float",
-    "min": 5000,
-    "max": 50000,
-    "default": 1.000000000000000e+04
+    "min": 10000,
+    "max": 10000,
+    "default": 10000.0
   },
   "PUMPB": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": -1.297500000000000e-03
+     "min": -0.00133,
+     "max": -0.001265,
+    "default": -0.00127
   },
   "PUMPC": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 1.530650000000000e+02
+     "min": 138.02,
+     "max": 168.11,
+    "default": 153.0
   },
   "HR": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 6.842500000000000e+01
+     "min": 65.0,
+     "max": 71.85,
+    "default": 68.0
   },
   "EF": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 2.200000000000000e-01
+     "min": 0.198,
+     "max": 0.242,
+    "default": 0.22
   },
   "DENSI": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 1.100000000000000e+00
+     "min": 1.1,
+     "max": 1.1,
+    "default": 1.1
   },
   "VISCO": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 3.720000000000000e-02
+     "min": 0.0372,
+     "max": 0.0372,
+    "default": 0.0372
   },
   "PUMPA": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 0.000000000000000e+00
+     "min": 0.0,
+     "max": 0.0,
+    "default": 0.0
   },
   "AORP": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 1.700000000000000e+03
+    "min": 1700.0,
+    "max": 1700.0,
+    "default": 1700.0
   },
   "AOC": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 1.200000000000000e-03
+     "min": 0.0012,
+     "max": 0.0012,
+    "default": 0.0012
   },
   "AORS": {
     "type": "float",
-    // "min": ???,
-    // "max": ???,
-    "default": 1.000000000000000e+02
+     "min": 100.0,
+     "max": 100.0,
+    "default": 100.0
   },
   // the output file to be used for the easyvvuq analysis
   "out_file": {
     "type": "string",    
-    "default": "out.csv" 
+    "default": "results.evvuq" 
   }
 }
