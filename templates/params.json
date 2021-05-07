@@ -1,8 +1,6 @@
 {
   "LAP": {
     "type": "float",
-    "min": 10000,
-    "max": 10000,
     "default": 10000.0
   },
   "PUMPB": {
@@ -31,38 +29,26 @@
   },
   "DENSI": {
     "type": "float",
-     "min": 1.1,
-     "max": 1.1,
     "default": 1.1
   },
   "VISCO": {
     "type": "float",
-     "min": 0.0372,
-     "max": 0.0372,
     "default": 0.0372
   },
   "PUMPA": {
     "type": "float",
-     "min": 0.0,
-     "max": 0.0,
     "default": 0.0
   },
   "AORP": {
     "type": "float",
-    "min": 1700.0,
-    "max": 1700.0,
     "default": 1700.0
   },
   "AOC": {
     "type": "float",
-     "min": 0.0012,
-     "max": 0.0012,
     "default": 0.0012
   },
   "AORS": {
     "type": "float",
-     "min": 100.0,
-     "max": 100.0,
     "default": 100.0
   },
   // the output file to be used for the easyvvuq analysis
