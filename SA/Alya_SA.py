@@ -13,6 +13,151 @@ from plugins.FabAlya.FabAlya import *
 
 @task
 @load_plugin_env_vars("FabAlya")
+def Alya_analyse_SA(config, ** args):
+    """
+    ==========================================================================
+
+    fab <remote_machine> Alya_init_SA:<config_name>
+
+    example:
+
+        fab localhost Alya_analyse_SA:fluid
+        fab marenostrum4 Alya_analyse_SA:fluid
+    ==========================================================================
+    """
+    update_environment()
+
+    #############################################
+    # load Alya SA configuration from yml file #
+    #############################################
+    Alya_SA_config_file = os.path.join(
+        get_plugin_path("FabAlya"),
+        "SA",
+        "Alya_SA_config.yml"
+    )
+    SA_campaign_config = load_SA_campaign_config(Alya_SA_config_file)
+    polynomial_order = SA_campaign_config["polynomial_order"]
+    sampler_name = SA_campaign_config["sampler_name"]
+    campaign_name = "Alya_SA_{}".format(sampler_name)
+
+    campaign_work_dir = os.path.join(
+        get_plugin_path("FabAlya"),
+        "SA",
+        "Alya_SA_{}".format(sampler_name)
+    )
+
+    load_campaign_files(campaign_work_dir)
+
+    fetched_results = False
+
+    for output_column in ["AVGFAO", "MXFAO", "FFAO", "AVGFLVAD", "MXFLVAD",
+                          "AVGFM", "MXFM", "QRAT"]:
+        ###################
+        # reload Campaign #
+        ###################
+        db_location = "sqlite:///" + campaign_work_dir + "/campaign.db"
+        campaign = uq.Campaign(name=campaign_name, db_location=db_location)
+        print("===========================================")
+        print("Reloaded campaign {}".format(campaign_name))
+        print("===========================================")
+
+        sampler = campaign.get_active_sampler()
+        campaign.set_sampler(sampler, update=True)
+
+        output_filename = SA_campaign_config["params"]["out_file"]["default"]
+        if not fetched_results:
+            ####################################################
+            # fetch results from remote machine                #
+            # here, we ONLY fetch the required results folders #
+            ####################################################
+            env.job_desc = "_SA_{}".format(sampler_name)
+            with_config(config)
+
+            job_folder_name = template(env.job_name_template)
+            print("fetching results from remote machine ...")
+            with hide("output", "running", "warnings"), \
+                    settings(warn_only=True):
+                fetch_results(regex=job_folder_name)
+            print("Done\n")
+
+            #####################################################
+            # copy ONLY the required output files for analyse,  #
+            # i.e., EasyVVUQ.decoders.target_filename           #
+            #####################################################
+            src = os.path.join(env.local_results, job_folder_name, "RUNS")
+            des = campaign.campaign_db.runs_dir()
+            print("Syncing output_dir ...")
+            # with hide("output", "running", "warnings"),
+            # settings(warn_only=True):
+            local(
+                "rsync -pthrz "
+                "--include='/*/' "
+                "--include='{}' "
+                "--exclude='*' "
+                "{}/  {} ".format(output_filename, src, des)
+            )
+            print("Done ...\n")
+
+            fetched_results = True
+
+        #######################################
+        # Create an decoder for data analysis #
+        #######################################
+        decoder = uq.decoders.SimpleCSV(
+            target_filename=output_filename,
+            output_columns=[output_column]
+        )
+
+        #####################
+        # execute collate() #
+        #####################
+        actions = uq.actions.Actions(
+            uq.actions.Decode(decoder)
+        )
+        campaign.replace_actions(campaign_name, actions)
+        campaign.execute().collate()
+        collation_result = campaign.get_collation_result()
+
+        ##################################################
+        # save dataframe containing all collated results #
+        ##################################################
+        collation_result.to_csv(
+            os.path.join(campaign_work_dir,
+                         "collation_result_{}.csv".format(output_column)
+                         ),
+            index=False
+        )
+
+        ###################################
+        #    Post-processing analysis     #
+        ###################################
+
+        if sampler_name == "SCSampler":
+            analysis = uq.analysis.SCAnalysis(
+                sampler=campaign._active_sampler,
+                qoi_cols=[output_column]
+            )
+        elif sampler_name == "PCESampler":
+            analysis = uq.analysis.PCEAnalysis(
+                sampler=campaign._active_sampler,
+                qoi_cols=[output_column]
+            )
+
+        campaign.apply_analysis(analysis)
+        results = campaign.get_last_analysis()
+
+        print("=" * 50)
+        print("QoI = {}\n".format(output_column))
+        print("descriptive statistics :")
+        print(results.describe(output_column))
+        print("the first order sobol index :")
+        print(results.sobols_first()[output_column])
+        print("=" * 50)
+        print("\n\n")
+
+
+@task
+@load_plugin_env_vars("FabAlya")
 def Alya_init_SA(config, ** args):
     """
     ==========================================================================
