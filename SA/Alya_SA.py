@@ -17,7 +17,7 @@ def Alya_analyse_SA(config, ** args):
     """
     ==========================================================================
 
-    fab <remote_machine> Alya_init_SA:<config_name>
+    fab <remote_machine> Alya_analyse_SA:<config_name>
 
     example:
 
