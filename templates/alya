@@ -9,3 +9,5 @@ ln -sf $TEMPLATE_INTPUT_FILES_PATH/* .
 /bin/bash remotepre.sh
 
 time mpirun $ALYA_EXE_PATH $config
+
+/bin/bash remote.sh
