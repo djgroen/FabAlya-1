@@ -62,3 +62,74 @@ Alya_simulation_config: &Alya_sim_config
   ```sh
  fab marenostrum4 alya:fluid,TestOnly=True
  ``` 
+
+##  Sensitivity analysis of parameters using EasyVVUQ
+
+### Parameter Exploration
+To perform sensitivity analysis on input parameters, there are two sampler examples, namely (a) SCSampler (Stochastic Collocation sampler) and (b) PCESampler (Polynomial Chaos Expansion sampler). Both approach are implemented in [Alya_SA.py](https://github.com/alfonsostg/FabAlya/blob/master/SA/Alya_SA.py) python script.
+-   `Alya_init_SA` allows to run SA for parameter exploration.
+-   `Alya_analyse_SA` provides analysis of obtained results.
+
+For the sensitivity analysis scripts, all input parameters are listed in 
+[FabSim3 Home)/plugins/FabAlya/templates/params.json](https://github.com/alfonsostg/FabAlya/blob/master/templates/params.json) file.
+
+The configuration for a SA can be found in [(FabSim3 Home)/plugins/FabAlya/SA/Alya_SA_config.yml](https://github.com/alfonsostg/FabAlya/blob/master/SA/Alya_SA_config.yml) as follows:
+```yml
+vary_parameters_range:
+    # <parameter_name:>
+    #   range: [<lower value>,<upper value>] 
+    LAP:
+        range: [5000, 50000]
+    DENSI:
+        range: [1.0, 1.1]
+    VISCO:
+        range: [0.03, 0.037]
+    HR:
+        range: [60.0, 80.0]
+    EF:
+        range: [0.1, 0.2]
+    AORP:
+        range: [1500.0, 2000.0]
+    AOC:
+        range: [0.0001, 0.001]
+    AORS:
+        range: [100.0, 500.0]
+
+selected_vary_parameters: ["HR",
+                          ]
+distribution_type: "Uniform" # Uniform, DiscreteUniform
+polynomial_order: 2
+...
+# available sampler: [SCSampler,PCESampler]
+sampler_name: "SCSampler"
+...
+...
+...
+```
+To vary input parameters and their corresponding distributions using stochastic collocation or polynomial chaos expansion samplers for sensitivity analysis, simply modify the `selected_vary_parameters` parameter in `Alya_SA_config.yml` file:
+```yml 
+selected_vary_parameters: ["HR",
+                          "DENSI",
+                          "AORS"
+                          ]
+```
+To change the number of polynomial order, modify the `polynomial_order` parameter in `Alya_SA_config.yml` file
+```yml 
+polynomial_order: 2
+```
+And, by changing `sampler_name` parameter, you can select one of available `SCSampler` or `PCESampler`sampler for a SA run.
+```yml 
+# available sampler: [SCSampler,PCESampler]
+sampler_name: "SCSampler"
+```
+
+### Run EasyVVUQ analysis
+####  Execution on a remote machine
+1.  To execute sensitivy analysis on a remote machine, simply run:
+```
+fab marenostrum4 Alya_init_SA:fluid
+```
+2.  Run the following command to copy back results from the remote machine and perform analysis. The results will then be in a directory inside `(FabSim Home)/results`.
+```
+fab marenostrum4 Alya_analyse_SA:fluid
+```
