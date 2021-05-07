@@ -47,6 +47,8 @@ try:
 
     # loads Sensitivity analysis (SA) tasks
     from plugins.FabAlya.SA.Alya_SA import Alya_init_SA
+    from plugins.FabAlya.SA.Alya_SA import Alya_analyse_SA
+
 
 except ImportError as err:
     # Output expected ImportErrors.
