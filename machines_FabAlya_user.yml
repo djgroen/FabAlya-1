@@ -27,6 +27,9 @@ marenostrum4:
   taskpersocket: 23
   cores: 368 # 8 nodes(8) = cores(368)/corespernode(46)  nodes = ceil(cores / cores_per_nodes)
 
+  # wall time in format days-hours:minutes:seconds
+  job_wall_time : "0-0:30:00"
+  
   # list of available queue for the job : bsc_queues
   queue_name: "debug" # or "bsc_case"
   memconfig_name: "highmem" #"highmem"
