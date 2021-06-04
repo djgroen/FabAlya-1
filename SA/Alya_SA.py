@@ -77,7 +77,7 @@ def Alya_analyse_SA(config, ** args):
             print("fetching results from remote machine ...")
             with hide("output", "running", "warnings"), \
                     settings(warn_only=True):
-                fetch_results(regex=job_folder_name)
+                fetch_results(regex=job_folder_name,files="results.evvuq")
             print("Done\n")
 
             #####################################################
