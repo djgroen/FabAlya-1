@@ -12,7 +12,7 @@ In case of having any issue, please look at to the [Known Issues](https://fabsim
 ## FabAlya Installation
 before submit a Alya simulation job,  you should install FabAlya which provides functionality to extend FabSim3's workflow and remote submission capabilities to Alya tasks. Please got to your local `FabSim3` folder , and install it by typing:
 ```sh
-fab localhost install_plugin:FabMD
+fab localhost install_plugin:FabAlya
 ```
 Once you have installed The FabAlya plugin, which will appear in  `FabSim3/plugins/FabAlya` directory, , you need to take a few small configuration steps before submitting a job to remote machine.
 
